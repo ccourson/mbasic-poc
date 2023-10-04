@@ -1,0 +1,28 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #1e1e1e;
+    color: #FFFFFF;
+    overflow: hidden;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.terminal {
+    background-color: #2e2e2e;
+    padding: 10px;
+    border-radius: 5px;
+    width: 600px;
+    max-width: 90%;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    overflow: auto;
+    font-size: 16px;
+    line-height: 1.5;
+    height: 400px;
+    resize: none;
+}

@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Web App</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #FFFFFF;
+            overflow: hidden;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .terminal {
+            background-color: #2e2e2e;
+            padding: 10px;
+            border-radius: 5px;
+            width: 600px;
+            max-width: 90%;
+            color: #FFFFFF;
+            border: none;
+            outline: none;
+            overflow: auto;
+            font-size: 16px;
+            line-height: 1.5;
+            height: 400px;
+            resize: none;
+        }
+    </style>
 </head>
+
 <body>
     <textarea class="terminal" autofocus></textarea>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            const $terminal = $(".terminal");
+
+            $terminal.on("keydown", function (event) {
+                if (event.key === "Enter") {
+                    const lines = $terminal.val().split("\n");
+                    const lastLine = lines[lines.length - 2];  // -1 would be the current empty line after pressing Enter
+                    const [command, ...args] = lastLine.split(" ");
+
+                    switch (command) {
+                        case "print":
+                            $terminal.val($terminal.val() + args.join(" ") + "\n");
+                            break;
+                        case "add":
+                            $terminal.val($terminal.val() + args.join(" ") + "\n");
+                            break;
+                        default:
+                            $terminal.val($terminal.val() + `Unknown command: ${command}\n`);
+                    }
+
+                    // Auto scroll to the bottom
+                    $terminal.scrollTop($terminal[0].scrollHeight);
+
+                    event.preventDefault();  // Prevent the default "Enter" behavior which adds a newline
+                }
+            });
+        });
+
+    </script>
 </body>
+
 </html>
